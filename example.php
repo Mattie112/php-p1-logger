@@ -20,14 +20,17 @@ $serial->confFlowControl("none");
 
 $open = $serial->deviceOpen();
 
-if(!$open)
-  die();
+if (!$open) {
+    die();
+}
 
-while(true)
-  {
-  $data = $serial->readPort();
-  if($data)
-    {
-    echo $data;
+while (true) {
+    $data = $serial->readPort();
+
+    if ($data) {
+        echo $data;
     }
-  }
+
+    // As the data is send only every 10 sec we might want to use the time to catch up sleep
+    sleep(1);
+}
