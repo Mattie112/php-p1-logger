@@ -24,18 +24,11 @@ p1-data-logger is a small PHP script to fetch, parse and upload data from your D
 ----------
 Simply create a cronjob (or use the Windows Task Scheduler) like:
 
-`* * * * * php /home/username/hosola-data-logger/export_data.php`
+`* * * * * php /home/username/php-p1-logger/to-be-determined`
 
 
 ----------
 
-
-# Special thanks
-----------
-Special thanks to these repositories I consulted when developing this script:
-
-* https://github.com/Woutrrr/Omnik-Data-Logger
-* https://github.com/micromys/Omnik
 
 #Licence
 ----------
