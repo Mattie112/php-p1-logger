@@ -1,18 +1,32 @@
 {
-    "name": "mattie112/php-p1-logger",
-    "description": "A logger/uploader for the p1 protocol of Dutch Smart Meters (DSMR 4)",
-    "minimum-stability": "stable",
-    "license": "Attribution-ShareAlike 4.0 International",
-    "require": {
-        "hyperthese/php-serial": "^1.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^5.2"
-    },
-    "authors": [
-        {
-            "name": "Mattie112",
-            "email": "mattie112@users.github.com"
-        }
-    ]
+  "name": "mattie112/php-p1-logger",
+  "description": "A logger/uploader for the p1 protocol of Dutch Smart Meters (DSMR 4)",
+  "minimum-stability": "stable",
+  "license": "Attribution-ShareAlike 4.0 International",
+  "require": {
+    "hyperthese/php-serial": "^1.0",
+    "monolog/monolog": "^1.17"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.2"
+  },
+  "authors": [
+    {
+      "name": "Mattie112",
+      "email": "mattie112@users.github.com"
+    }
+  ],
+  "repositories": [
+    {
+      "url": "https://github.com/Mattie112/PHP-Serial",
+      "type": "git"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Mattie112\\php_p1_logger\\": [
+        "src/"
+      ]
+    }
+  }
 }

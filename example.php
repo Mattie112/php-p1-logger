@@ -12,7 +12,7 @@ $serial = new PhpSerial();
 
 $serial->deviceSet("/dev/ttyAMA0");
 
-$serial->confBaudRate(11500);
+$serial->confBaudRate(115200);
 $serial->confParity("none");
 $serial->confCharacterLength(8);
 $serial->confStopBits(1);
