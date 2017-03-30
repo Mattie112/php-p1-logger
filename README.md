@@ -1,7 +1,7 @@
-# Hosola-data-logger
+# php-p1-logger
 ===================
 
-p1-data-logger is a small PHP script to fetch, parse and upload data from your DSMR 4 compliant meter. Currently it supports upload to PVOutput and/or a MySQL database
+p1-data-logger is a small PHP script to fetch, parse and upload data from your DSMR 4 compliant meter. Currently it supports upload to PVOutput.
 
 ----------
 
@@ -15,16 +15,13 @@ p1-data-logger is a small PHP script to fetch, parse and upload data from your D
 * Execute a `composer install` to fetch dependencies
 * Copy the example.ini to config.ini and edit this file
 * Checkout the "example.php" and "export_data.php" file to get you started!
-* If you want to use MySQL don't forget to import the SQL file
 
 ----------
 
 
 # Automatic upload to PVOut
 ----------
-Simply create a cronjob (or use the Windows Task Scheduler) like:
-
-`* * * * * php /home/username/php-p1-logger/to-be-determined`
+Run the service: `php p1_logger_service.php`
 
 
 ----------

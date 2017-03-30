@@ -24,6 +24,8 @@ class P1LoggerService
     protected $databuffer;
     /** @var  P1Parser */
     protected $parser;
+    /** @var UploadInterface[] */
+    protected $uploaders;
 
     /**
      * P1LoggerService constructor.
@@ -37,6 +39,7 @@ class P1LoggerService
         $this->config = $config;
         $this->parser = new P1Parser($logger);
         $this->serial = $this->initializeSerialPort($config);
+        $this->uploaders[] = new PVOutputUploader($config, $logger);
     }
 
     /**
@@ -80,10 +83,13 @@ class P1LoggerService
         // We will now parse the data
         $parsed_data = $this->parser->parseTelegram($this->databuffer);
 
+        // Now we have a nice array with key=>values we can use
+        foreach ($this->uploaders as $uploader) {
+            $uploader->upload($parsed_data);
+        }
+
         // Reset the databuffer
         $this->databuffer = null;
-
-
     }
 
     /**
@@ -93,8 +99,7 @@ class P1LoggerService
     {
         while (true) {
 
-            $simulate = true;
-            if ($simulate) {
+            if (isset($this->config["simulate"]) && $this->config["simulate"] == true) {
                 $data = "/XMX5LGBBFFB23127xxxx2\r\n\r\n1-3:0.2.8(42)\r\n0-0:1.0.0(160327165616S)\r\n0-0:96.1.1(4530303034303xxxxxxx238343xxx)\r\n1-0:1.8.1(000755.889*kWh)\r\n1-0:2.8.1(000096.825*kWh)\r\n1-0:1.8.2(000310.532*kWh)\r\n1-0:2.8.2(000321.425*kWh)\r\n0-0:96.14.0(0001)\r\n1-0:1.7.0(00.000*kW)\r\n1-0:2.7.0(02.514*kW)\r\n0-0:96.7.21(00001)\r\n0-0:96.7.9(00000)\r\n1-0:99.97.0(0)(0-0:96.7.19)\r\n1-0:32.32.0(00000)\r\n1-0:32.36.0(00000)\r\n0-0:96.13.1()\r\n0-0:96.13.0()\r\n1-0:31.7.0(011*A)\r\n1-0:21.7.0(00.000*kW)\r\n1-0:22.7.0(02.514*kW)\r\n0-1:24.1.0(003)\r\n0-1:96.1.0(473030313xxxxxxx73838303xxx)\r\n0-1:24.2.1(160327160000S)(00303.186*m3)\r\n!644A\r\n";
             } else {
                 $data = $this->serial->readPort();

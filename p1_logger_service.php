@@ -26,7 +26,7 @@ if (!is_array($options) || isset($options["help"])) {
 }
 
 // Parse the config file
-$config = parse_ini_file(__DIR__ . "/config.ini");
+$config = parse_ini_file(__DIR__ . "/config.ini", true);
 
 $config_defaults = [
     "serial" => [
@@ -36,6 +36,7 @@ $config_defaults = [
         "databits" => 8,
         "stopbits" => 1,
         "flow_control" => "none",
+        "simulate" => false,
     ],
     "debug_mode" => false,
     "log_to_console" => false
@@ -69,6 +70,8 @@ if ($config["log_to_console"]) {
 // Create Logger
 $logger = new Logger($ident);
 $logger->pushHandler($log_handler);
+
+$logger->debug("Config", $config);
 
 //Now start the actual service
 $service = new P1LoggerService($config, $logger);
